@@ -3,7 +3,7 @@ name: ci test
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   bake:
@@ -25,6 +25,6 @@ jobs:
         name: Build and push
         uses: docker/bake-action@v4
         with:
-          context: DockerFileFolder/   or .
+          context: .
           push: true
-          tags: swamikari/deployment:latest
+          tags: swamikari/testaction:latest
