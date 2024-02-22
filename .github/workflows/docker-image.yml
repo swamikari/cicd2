@@ -22,8 +22,8 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
-        name: Build and push
-        uses: docker/bake-action@v4
+        name: Docker Buildx Bake
+        uses: docker/bake-action@v4.1.0
         with:
           context: .
           push: true
