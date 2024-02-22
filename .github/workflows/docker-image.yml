@@ -23,8 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
         name: Docker Buildx Bake
-        uses: docker/bake-action@v4.1.0
+        uses: docker/bake-action@v4
         with:
-          context: .
           push: true
           tags: swamikari/testaction:latest
