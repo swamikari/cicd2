@@ -1,28 +1,30 @@
-  name: Push into main branch
-  on:
-    push:
-      branches: [ master ]
+name: ci test
 
-  jobs:
-    context:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+on:
+  push:
+    branches:
+      - 'master'
 
-      - name: Build
-        id: build
-        uses: cloudposse/github-action-docker-build-push@main
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v3
         with:
-          registry: registry.hub.docker.com
-          organization: "${{ github.event.repository.owner.login }}"
-          repository: "${{ github.event.repository.name }}"
-          login: "${{ secrets.DOCKER_USER }}"
-          password: "${{ secrets.DOCKER_PASSWORD }}"
-          platforms: linux/amd64,linux/arm64
-       -name: Docker Buildx Bake
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
         uses: docker/bake-action@v4
         with:
-          context: .
+          context:  .
           push: true
-          tags: swamikari/testaction:testimg3
+          tags: swamikari/testaction:latest
