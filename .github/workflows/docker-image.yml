@@ -27,4 +27,4 @@ jobs:
         with:
           context:  .
           push: true
-          tags: swamikari/testaction:latest
+          tags: swamikari/cicd2:latest
