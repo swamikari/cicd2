@@ -24,6 +24,6 @@ jobs:
         name: Build and push
         uses: docker/bake-action@v4
         with:
-          context:  .
+          context: push
           push: true
           tags: swamikari/deployment:latest
